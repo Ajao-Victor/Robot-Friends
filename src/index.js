@@ -3,24 +3,24 @@ import ReactDOM from 'react-dom/client';
 import App from './Container/App';
 import reportWebVitals from './reportWebVitals';
 import { Provider} from 'react-redux';
-import { createStore,applyMiddleware,combineReducers } from 'redux';
-// import { combineReducers } from '@reduxjs/toolkit';
-// import { configureStore } from '@reduxjs/toolkit';
-import { searchRobot,requestRobots } from './Components/Reducer';
+// import { createStore,applyMiddleware,combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
+import { searchRobot,requestRobots} from './Components/Reducer';
 import { createLogger } from 'redux-logger';
 import  {thunk}   from 'redux-thunk';
 
 const rootReducer = combineReducers({
   searchRobot,
-  requestRobots
+  requestRobots,
 })
 
 const logger = createLogger()
-const store = createStore(rootReducer,applyMiddleware(thunk,logger))
-// const store = configureStore({
-//   reducer : rootReducer,
-//   middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk,logger)
-// })
+// const store = createStore(rootReducer,applyMiddleware(thunk,logger))
+const store = configureStore({
+  reducer : rootReducer,
+  middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk,logger)
+})
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

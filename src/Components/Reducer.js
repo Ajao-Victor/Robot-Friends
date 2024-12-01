@@ -1,8 +1,7 @@
-
 import { CHANGE_SEARCH_FIELD,
          REQUEST_ROBOTS_PENDING,
          REQUEST_ROBOTS_SUCCESS,
-         REQUEST_ROBOTS_FAILED 
+         REQUEST_ROBOTS_FAILED ,
         } from "./const";
         
 const initialState = {
@@ -11,7 +10,7 @@ const initialState = {
 export const searchRobot = (state = initialState,action) => {
     switch (action.type) {
         case CHANGE_SEARCH_FIELD:
-            return {...state,SearchField: action.payload}
+            return {...state,SearchField: action.payload};
         default:
             return state;
     }
@@ -25,15 +24,19 @@ const initialStateRobots = {
 export const requestRobots = (state = initialStateRobots,action) => {
 switch (action.type) {
     case REQUEST_ROBOTS_PENDING:
-        return Object.assign({}, state,{isPending : true})
+        // return Object.assign({}, state,{isPending : true});
+        return {...state,isPending:true};
     case REQUEST_ROBOTS_SUCCESS:
-        return Object.assign({},state,{robott : action.payload,isPending : false})
+        // return Object.assign({},state,{robott : action.payload,isPending : false});
+        return {...state,robott:action.payload,isPending:false};
         case REQUEST_ROBOTS_FAILED:
-            return Object.assign({}, state,{error :action.payload,isPendinqg :false})
+            // return Object.assign({}, state,{error :action.payload,isPendinqg :false});
+            return{...state,error:action.payload,isPending:false};
     default:
         return initialStateRobots;
 }
 };
+
 
 // https://www.npmjs.com/package/axios
 // https://axios-http.com/
